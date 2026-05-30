@@ -21,39 +21,39 @@
         
         /* الصورة الملكية والاسم */
         .profile-section { position: relative; margin-top: -50px; text-align: center; padding-bottom: 10px; display: flex; flex-direction: column; align-items: center; }
-        .crown { font-size: 2rem; margin-bottom: -10px; animation: float 2s infinite alternate; }
-        .profile-img { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #131722; box-shadow: 0 0 15px #00e5ff; }
+        .crown { font-size: 2rem; margin-bottom: -10px; animation: float 2s infinite alternate; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #131722; box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); object-fit: cover; }
         
-        /* اسم آدم وعلامة غاتس */
+        /* اسم solo وعلامة غاتس المحسنة */
         .profile-name-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 12px;
         }
         .profile-name {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
         }
         .guts-brand {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 28px;
             fill: #ff003c;
-            filter: drop-shadow(0 0 5px #ff003c);
-            animation: pulse-brand 1.5s infinite alternate;
+            filter: drop-shadow(0 0 6px #ff003c);
+            animation: pulse-brand 1.2s infinite alternate ease-in-out;
         }
 
-        @keyframes float { from { transform: translateY(0); } to { transform: translateY(-5px); } }
-        @keyframes pulse-brand { from { opacity: 0.7; filter: drop-shadow(0 0 3px #ff003c); } to { opacity: 1; filter: drop-shadow(0 0 8px #ff003c); } }
+        @keyframes float { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+        @keyframes pulse-brand { from { transform: scale(0.95); opacity: 0.7; filter: drop-shadow(0 0 4px #ff003c); } to { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 10px #ff003c); } }
         
         /* الأزرار والعناوين */
         .content { padding: 10px 20px 20px 20px; text-align: center; }
         .title { font-size: 1.3rem; font-weight: 900; color: #00e5ff; margin-bottom: 20px; line-height: 1.4; }
-        .btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; font-weight: bold; text-decoration: none; text-align: center; color: #000; background: #00e5ff; transition: 0.3s; }
+        .btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; font-weight: bold; text-decoration: none; text-align: center; color: #000; background: #00e5ff; transition: 0.3s; cursor: pointer; border: none; font-size: 1rem; }
         .btn:hover { background: #00b0ff; transform: scale(1.02); }
     </style>
 </head>
@@ -69,27 +69,48 @@
         <img src="IMG_20260102_234410_803.jpg" alt="Background">
     </div>
 
-    <!-- قسم الملف الشخصي المحدث -->
+    <!-- قسم الملف الشخصي المعدل -->
     <div class="profile-section">
         <div class="crown">👑</div>
-        <img src="IMG_20260530_044019_296.jpg" class="profile-img" alt="Profile">
+        <!-- الصورة الدائرية الجديدة في المنتصف -->
+        <img src="IMG_20260519_015301_625.webp" class="profile-img" alt="Profile">
         
-        <!-- اسم آدم مع علامة التضحية لـ غاتس -->
+        <!-- اسم solo مع علامة غاتس فائقة الوضوح -->
         <div class="profile-name-wrapper">
-            <span class="profile-name">Adam</span>
+            <span class="profile-name">solo</span>
             <svg class="guts-brand" viewBox="0 0 24 32">
-                <!-- رسم دقيق لعلامة Berserk (Brand of Sacrifice) -->
-                <path d="M12,0 L14,5 L14,13 L22,7 L23,9 L14,16 L18,25 L16,26 L12,18 L8,26 L6,25 L10,16 L1,9 L2,7 L10,13 L10,5 Z M11,15 L11,32 L13,32 L13,15 Z"/>
+                <!-- رسم دقيق واحترافي لعلامة التضحية (Berserk Brand) وعمودها الفقري الممتد -->
+                <path d="M12,0 L14.5,4.5 L14.5,12.5 L23,6.5 L24,8.5 L14.5,15.5 L19,25 L17,26 L12,18.5 L7,26 L5,25 L9.5,15.5 L0,8.5 L1,6.5 L9.5,12.5 L9.5,4.5 Z M10.5,14.5 L10.5,32 L13.5,32 L13.5,14.5 Z"/>
             </svg>
         </div>
     </div>
 
     <div class="content">
         <h1 class="title">solo still here <br> & gl6c</h1>
-        <a href="intent://rave.link/VgHzDuj#Intent;scheme=https;package=com.rave.app;end" class="btn">🚀 دخول الغرفة السريعة</a>
-        <a href="intent://rave.link/VgHzDuj#Intent;scheme=https;package=com.rave.app;end" class="btn" style="background:#1c2135; color:#fff;">🔄 فتح في تطبيق Rave</a>
+        
+        <!-- أزرار الدخول الذكية للروم -->
+        <button onclick="enterRaveRoom()" class="btn">🚀 دخول الغرفة السريعة</button>
+        <button onclick="enterRaveRoom()" class="btn" style="background:#1c2135; color:#fff;">🔄 فتح في تطبيق Rave</button>
     </div>
 </div>
+
+<script>
+    function enterRaveRoom() {
+        // المحاولة الأولى: فتح الرابط عبر بروتوكول التطبيق لإجبار الهاتف على تشغيل Rave فوراً
+        var intentUrl = "intent://rave.link/VgHzDuj#Intent;scheme=https;package=com.rave.app;end";
+        var fallbackUrl = "https://rave.link/VgHzDuj";
+        
+        var start = Date.now();
+        window.location.href = intentUrl;
+        
+        // إذا لم يفتح التطبيق خلال ثانية واحدة، يقوم المتصفح تلقائياً بالتحويل للرابط المباشر
+        setTimeout(function() {
+            if (Date.now() - start < 1500) {
+                window.location.href = fallbackUrl;
+            }
+        }, 1000);
+    }
+</script>
 
 </body>
 </html>
