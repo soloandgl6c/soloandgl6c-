@@ -3,352 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rave - Solo & GL6C</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Solo & GL6C - Rave Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        body {
-            background-color: #0b0d19; 
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .rave-container {
-            width: 100%;
-            max-width: 450px;
-            background-color: #131722;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 229, 255, 0.15);
-            border: 1px solid #1f2638;
-            position: relative;
-        }
-
-        .rave-player {
-            width: 100%;
-            position: relative;
-            background-color: #000000;
-            aspect-ratio: 16 / 11;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .rave-player img.main-bg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .live-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: #ff0055;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            animation: pulse 1.5s infinite;
-            z-index: 10;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-
-        /* تعديل زر تسجيل الدخول ليصبح أسفل شارة البث */
-        .login-btn {
-            position: absolute;
-            top: 55px;
-            right: 15px;
-            background-color: rgba(19, 23, 34, 0.8);
-            border: 1px solid #00e5ff;
-            color: #00e5ff;
-            padding: 4px 12px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 10;
-        }
-
-        /* تصميم قسم الهارب في أعلى اليسار */
-        .traitor-container {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 20;
-            background: rgba(11, 13, 25, 0.85);
-            padding: 8px;
-            border-radius: 16px;
-            border: 1px solid #ff0055;
-            max-width: 120px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3);
-        }
-
-        .traitor-img {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 2px solid #ff0055;
-            object-fit: cover;
-        }
-
-        .traitor-text {
-            color: #ff3377;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-top: 4px;
-            line-height: 1.2;
-        }
-
-        .traitor-arrow {
-            color: #ff0055;
-            font-size: 1rem;
-            line-height: 1;
-            margin-bottom: 2px;
-            animation: bounce 1s infinite alternate;
-        }
-
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-4px); }
-        }
-
-        .rave-content {
-            padding: 30px 25px 20px 25px;
-            text-align: center;
-            position: relative;
-        }
-
-        .avatar-container {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 4px solid #131722;
-            overflow: hidden;
-            position: absolute;
-            top: -45px;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
-
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .rave-logo-text {
-            color: #00e5ff; 
-            font-size: 1.6rem;
-            font-weight: 900;
-            margin-top: 35px;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-
-        .kings-title {
-            font-size: 1.6rem;
-            font-weight: 900;
-            line-height: 1.4;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .kings-title span {
-            color: #00e5ff;
-            background: linear-gradient(45deg, #00e5ff, #bd00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 900;
-        }
-
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .btn-action {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .btn-join {
-            background: linear-gradient(90deg, #00e5ff, #00b0ff);
-            color: #0b0d19;
-            box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
-        }
-
-        .btn-join:hover {
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-        }
-
-        .btn-transfer {
-            background-color: #1c2135;
-            color: #ffffff;
-            border: 1px solid #2d3748;
-        }
-
-        .btn-transfer:hover {
-            background-color: #252b46;
-        }
-
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: #131722;
-            border: 1px solid #1f2638;
-            padding: 25px;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 360px;
-            text-align: center;
-        }
-
-        .modal-content h3 { margin-bottom: 15px; color: #00e5ff; }
-        .modal-content input {
-            width: 100%; padding: 10px; margin-bottom: 15px;
-            background-color: #0b0d19; border: 1px solid #2d3748;
-            border-radius: 8px; color: white; text-align: center;
-        }
-
-        .modal-content button {
-            background-color: #00e5ff; color: #131722;
-            padding: 10px 20px; border: none; border-radius: 8px;
-            font-weight: bold; cursor: pointer; width: 100%;
-        }
-
-        .rave-footer {
-            background-color: #0b0d19;
-            padding: 15px;
-            text-align: center;
-            border-top: 1px solid #1f2638;
-            font-size: 0.8rem;
-            color: #4a5568;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: #0b0d19; color: #ffffff; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .container { width: 100%; max-width: 400px; background: #131722; border-radius: 25px; overflow: hidden; border: 1px solid #1f2638; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* مشغل الميديا */
+        .player { position: relative; width: 100%; aspect-ratio: 16/10; background: #000; }
+        .player img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* الهارب */
+        .traitor { position: absolute; top: 10px; left: 10px; z-index: 10; text-align: center; }
+        .traitor img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #ff0055; }
+        .traitor p { font-size: 0.6rem; color: #ff0055; font-weight: bold; }
+        
+        /* الصورة الملكية */
+        .profile-section { position: relative; margin-top: -50px; text-align: center; padding-bottom: 20px; }
+        .crown { font-size: 2rem; margin-bottom: -10px; animation: float 2s infinite alternate; }
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #131722; box-shadow: 0 0 15px #00e5ff; }
+        
+        @keyframes float { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+        
+        /* الأزرار */
+        .content { padding: 20px; text-align: center; }
+        .title { font-size: 1.5rem; font-weight: 900; color: #00e5ff; margin-bottom: 20px; }
+        .btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; font-weight: bold; text-decoration: none; text-align: center; color: #000; background: #00e5ff; transition: 0.3s; }
+        .btn:hover { background: #00b0ff; transform: scale(1.02); }
     </style>
 </head>
 <body>
 
-    <div class="rave-container">
-        <!-- مشغل الميديا الرئيسي مع إضافات اليسار واليمين -->
-        <div class="rave-player">
-            <!-- شارات اليمين -->
-            <span class="live-badge">RAVE ROOM</span>
-            <button class="login-btn" id="loginBtn" onclick="openModal()">تسجيل الدخول</button>
-
-            <!-- قسم الهارب المضاف حديثاً في أعلى اليسار -->
-            <div class="traitor-container">
-                <div class="traitor-arrow">⬇</div>
-                <img src="IMG_20260522_205812_850.jpg" class="traitor-img" alt="Traitor">
-                <div class="traitor-text">هذا الهارب لا نعترف به</div>
-            </div>
-
-            <img src="IMG_20260102_234410_803.jpg" class="main-bg" alt="Rave Main Media">
+<div class="container">
+    <div class="player">
+        <!-- قسم الهارب -->
+        <div class="traitor">
+            <img src="IMG_20260522_205812_850.jpg" alt="Traitor">
+            <p>الهارب لا نعترف به</p>
         </div>
-
-        <!-- محتوى واجهة الغرفة -->
-        <div class="rave-content">
-            <div class="avatar-container">
-                <img src="IMG_20260511_145105_983.jpg" alt="Rave Avatar">
-            </div>
-
-            <div class="rave-logo-text" id="welcomeText">RAVE ROOM</div>
-            <h1 class="kings-title"><span>solo still here</span> <br> & gl6c</h1>
-            
-            <div class="action-buttons">
-                <a href="https://rave.link/VgHzDuj" target="_blank" class="btn-action btn-join">
-                    🚀 دخول الغرفة السريعة
-                </a>
-                <a href="https://rave.link/VgHzDuj" target="_blank" class="btn-action btn-transfer">
-                    🔄 نقل الغرفة الحالية إلى التطبيق
-                </a>
-            </div>
-        </div>
-
-        <div class="rave-footer">
-            تطوير الواجهة لـ سولو و gl6c © 2026
-        </div>
+        <img src="IMG_20260102_234410_803.jpg" alt="Background">
     </div>
 
-    <!-- نافذة تسجيل الدخول المحاكية -->
-    <div class="login-modal" id="loginModal">
-        <div class="modal-content">
-            <h3>تسجيل الدخول إلى Rave</h3>
-            <p style="font-size: 0.85rem; color: #a0aec0; margin-bottom: 15px;">ادخل حسابك للاتصال بغرفة الملوك</p>
-            <input type="text" id="usernameInput" placeholder="اسم المستخدم في Rave">
-            <input type="password" placeholder="كلمة المرور">
-            <button onclick="submitLogin()">ربط الحساب الآن</button>
-        </div>
+    <div class="profile-section">
+        <div class="crown">👑</div>
+        <img src="IMG_20260530_044019_296.jpg" class="profile-img" alt="Profile">
     </div>
 
-    <script>
-        function openModal() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        function submitLogin() {
-            var name = document.getElementById('usernameInput').value;
-            if(name.trim() !== "") {
-                document.getElementById('welcomeText').innerHTML = "أهلاً بك، " + name;
-                document.getElementById('loginBtn').innerHTML = "متصل ✅";
-            }
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            var modal = document.getElementById('loginModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    <div class="content">
+        <h1 class="title">solo still here <br> & gl6c</h1>
+        <a href="intent://rave.link/VgHzDuj#Intent;scheme=https;package=com.rave.app;end" class="btn">🚀 دخول الغرفة السريعة</a>
+        <a href="intent://rave.link/VgHzDuj#Intent;scheme=https;package=com.rave.app;end" class="btn" style="background:#1c2135; color:#fff;">🔄 فتح في تطبيق Rave</a>
+    </div>
+</div>
 
 </body>
 </html>
