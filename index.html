@@ -173,10 +173,11 @@
         .btn-join {
             background: linear-gradient(90deg, #00e5ff, #00b0ff);
             color: #0b0d19;
+            box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
         }
 
         .btn-join:hover {
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
         }
 
         .btn-transfer {
@@ -253,10 +254,10 @@
             <div class="rave-logo-text" id="welcomeText">RAVE ROOM</div>
             <h1 class="kings-title">نحن ملوك البرنامج <br><span>سولو & gl6c</span></h1>
             
-            <!-- أزرار التحكم ونقل الغرف التفاعلية -->
+            <!-- أزرار التحكم ونقل الغرف المربوطة بحسابك -->
             <div class="action-buttons">
-                <!-- يمكنك استبدال الرابط أدناه برابط غرفتك الحقيقية في Rave إن أردت -->
-                <a href="https://rave.io" target="_blank" class="btn-action btn-join">
+                <!-- تم وضع رابط غرفتك الحقيقي هنا بنجاح -->
+                <a href="https://rave.link/VgHzDuj" target="_blank" class="btn-action btn-join">
                     🚀 دخول الغرفة السريعة
                 </a>
                 <button class="btn-action btn-transfer" onclick="simulateTransfer()">
@@ -282,7 +283,6 @@
     </div>
 
     <script>
-        // فتح وإغلاق نافذة تسجيل الدخول
         function openModal() {
             document.getElementById('loginModal').style.display = 'flex';
         }
@@ -296,14 +296,12 @@
             document.getElementById('loginModal').style.display = 'none';
         }
 
-        // محاكاة نقل الغرفة
+        // نقل الغرفة المباشر باستخدام رابط غرفتك
         function simulateTransfer() {
-            alert("جاري تجهيز سيرفر النقل... سيتم توجيهك الآن لفتح الغرفة على تطبيق Rave الرسمي!");
-            // يفتح موقع ريف الرسمي كمحاكاة للنقل
-            window.open('https://rave.io', '_blank');
+            alert("جاري تجهيز سيرفر النقل... سيتم فتح الغرفة الرسمية لـ الملوك الآن!");
+            window.open('https://rave.link/VgHzDuj', '_blank');
         }
 
-        // إغلاق النافذة عند الضغط خارجها
         window.onclick = function(event) {
             var modal = document.getElementById('loginModal');
             if (event.target == modal) {
@@ -313,5 +311,4 @@
     </script>
 
 </body>
-    </html>
-    
+</html>
