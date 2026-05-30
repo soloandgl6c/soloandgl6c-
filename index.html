@@ -55,10 +55,11 @@
             object-fit: cover;
         }
 
+        /* تم نقل الشارة الوردية لليسار بناءً على الصورة 1000016254.jpg لمنع التداخل */
         .live-badge {
             position: absolute;
             top: 15px;
-            right: 15px;
+            left: 15px;
             background-color: #ff0055;
             color: white;
             padding: 4px 12px;
@@ -75,11 +76,11 @@
             100% { opacity: 0.6; }
         }
 
-        /* زر تسجيل الدخول العلوي */
+        /* زر تسجيل الدخول العلوي - تم نقله لليمين لتجنب التداخل */
         .login-btn {
             position: absolute;
             top: 15px;
-            left: 15px;
+            right: 15px;
             background-color: rgba(19, 23, 34, 0.8);
             border: 1px solid #00e5ff;
             color: #00e5ff;
@@ -254,12 +255,12 @@
             <div class="rave-logo-text" id="welcomeText">RAVE ROOM</div>
             <h1 class="kings-title">نحن ملوك البرنامج <br><span>سولو & gl6c</span></h1>
             
-            <!-- أزرار التحكم ونقل الغرف المربوطة بحسابك -->
             <div class="action-buttons">
-                <!-- تم وضع رابط غرفتك الحقيقي هنا بنجاح -->
+                <!-- الزر الأول ينقل لغرفتك الحقيقية مباشرة -->
                 <a href="https://rave.link/VgHzDuj" target="_blank" class="btn-action btn-join">
                     🚀 دخول الغرفة السريعة
                 </a>
+                <!-- الزر الثاني تم تعديله هنا لينقل أيضاً لغرفتك بعد التنبيه -->
                 <button class="btn-action btn-transfer" onclick="simulateTransfer()">
                     🔄 نقل الغرفة الحالية إلى التطبيق
                 </button>
@@ -271,7 +272,7 @@
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول المحاكية -->
+    <!-- نافذة تسجيل الدخول -->
     <div class="login-modal" id="loginModal">
         <div class="modal-content">
             <h3>تسجيل الدخول إلى Rave</h3>
@@ -296,9 +297,9 @@
             document.getElementById('loginModal').style.display = 'none';
         }
 
-        // نقل الغرفة المباشر باستخدام رابط غرفتك
+        // تم تعديل الرابط هنا لفتح غرفتك الحقيقية مباشرة
         function simulateTransfer() {
-            alert("جاري تجهيز سيرفر النقل... سيتم فتح الغرفة الرسمية لـ الملوك الآن!");
+            alert("جاري تجهيز سيرفر النقل... سيتم فتح الغرفة الرسمية لـ الملوك الآن على التطبيق!");
             window.open('https://rave.link/VgHzDuj', '_blank');
         }
 
