@@ -90,11 +90,6 @@
             z-index: 10;
         }
 
-        .login-btn:hover {
-            background-color: #00e5ff;
-            color: #131722;
-        }
-
         .rave-content {
             padding: 30px 25px 20px 25px;
             text-align: center;
@@ -130,10 +125,11 @@
         }
 
         .kings-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 900;
             line-height: 1.4;
             margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
         .kings-title span {
@@ -245,16 +241,15 @@
             </div>
 
             <div class="rave-logo-text" id="welcomeText">RAVE ROOM</div>
-            <h1 class="kings-title"> solo still here  <br><span>سولو & gl6c</span></h1>
+            <h1 class="kings-title"><span>solo still here</span> <br> & gl6c</h1>
             
             <div class="action-buttons">
-                <!-- تم إصلاح الرابط هنا ليعمل بطريقة برمجية مباشرة ومستقلة وضمان الانتقال للغرفة فوراً -->
-                <button class="btn-action btn-join" onclick="goToRoom()">
+                <a href="https://rave.link/VgHzDuj" target="_blank" class="btn-action btn-join">
                     🚀 دخول الغرفة السريعة
-                </button>
-                <button class="btn-action btn-transfer" onclick="goToRoom()">
+                </a>
+                <a href="https://rave.link/VgHzDuj" target="_blank" class="btn-action btn-transfer">
                     🔄 نقل الغرفة الحالية إلى التطبيق
-                </button>
+                </a>
             </div>
         </div>
 
@@ -285,11 +280,6 @@
                 document.getElementById('loginBtn').innerHTML = "متصل ✅";
             }
             document.getElementById('loginModal').style.display = 'none';
-        }
-
-        // دالة موحدة ومباشرة تفتح غرفتك الحقيقية بنسبة 100% دون الاعتماد على مسارات خارجية
-        function goToRoom() {
-            window.open('https://rave.link/VgHzDuj', '_blank');
         }
 
         window.onclick = function(event) {
