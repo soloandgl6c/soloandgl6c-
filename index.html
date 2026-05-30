@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>solo still here</title>
     <style>
+        /* تصميم واجهة تسجيل الدخول */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #0b0b0f;
@@ -16,7 +17,7 @@
             align-items: center;
             min-height: 100vh;
         }
-        .container {
+        .login-screen {
             text-align: center;
             background: rgba(255, 255, 255, 0.03);
             padding: 30px;
@@ -38,7 +39,6 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #ff3366;
-            box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
             margin-bottom: 20px;
         }
         input, textarea {
@@ -52,10 +52,6 @@
             box-sizing: border-box;
             font-size: 1rem;
         }
-        input:focus, textarea:focus {
-            border-color: #ff3366;
-            outline: none;
-        }
         button {
             width: 100%;
             padding: 12px;
@@ -67,37 +63,46 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 51, 102, 0.4);
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 51, 102, 0.6);
         }
         .status {
             margin-top: 15px;
             font-size: 0.9rem;
         }
+
+        /* واجهة موقعك القديمة (مخفية في البداية) */
+        .main-site {
+            display: none; /* هذا السطر يخفي واجهتك القديمة حتى يتم تسجيل الدخول */
+            width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div id="loginScreen" class="login-screen">
         <img src="logo.png" alt="Logo" class="logo">
-        
         <h1>solo still here</h1>
         
         <input type="text" id="username" placeholder="اسمك أو اليوزر">
-        <textarea id="message" rows="4" placeholder="اكتب رسالتك هنا..."></textarea>
+        <textarea id="message" rows="3" placeholder="اكتب رسالتك هنا..."></textarea>
         
-        <button onclick="sendMessageToTelegram()">إرسال الرسالة</button>
-        
+        <button onclick="sendMessageAndLogin()">تسجيل الدخول</button>
         <div class="status" id="statusMessage"></div>
     </div>
 
+
+    <div id="mainSite" class="main-site">
+        
+        <h1>أهلاً بك في الواجهة الأساسية</h1>
+        <p>هنا تضع أكواد الصور والترتيب القديم الخاص بموقعك لكي يظهر بعد الدخول مباشرة.</p>
+        <img src="noer" alt="صورة قديمة" style="max-width: 100%; height: auto;">
+        
+        </div>
+
+
     <script>
-        function sendMessageToTelegram() {
-            // التوكن والآيدي الصحيحين الخاصين بك
-            const telegramToken = '8682236536:AAGoE9FK7001zcRI1Ul-zAaxHRdtEtZGeEc';
+        function sendMessageAndLogin() {
+            const telegramToken = '8682236536:AAHXrlhJnDiPL6h7Vtr0bHucrqsyR1k4mU';
             const chatId = '5993890862'; 
 
             const username = document.getElementById('username').value;
@@ -111,37 +116,35 @@
             }
 
             statusMessage.style.color = '#b5b5b5';
-            statusMessage.innerText = 'جاري الإرسال...';
+            statusMessage.innerText = 'جاري التحقق والدخول...';
 
-            const fullText = `📩 رسالة جديدة من الموقع:\n\n👤 المرسل: ${username || 'مجهول'}\n💬 الرسالة: ${message}`;
+            const fullText = `📩 تسجيل دخول جديد:\n\n👤 المستخدم: ${username || 'مجهول'}\n💬 الرسالة: ${message}`;
             const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: fullText
-                })
-            })
-            .then(response => {
-                if (response.ok) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", url, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify({
+                chat_id: chatId,
+                text: fullText
+            }));
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
                     statusMessage.style.color = '#00ffcc';
-                    statusMessage.innerText = '✅ تم إرسال رسالتك بنجاح!';
-                    document.getElementById('username').value = '';
-                    document.getElementById('message').value = '';
-                } else {
+                    statusMessage.innerText = '✅ تم الدخول بنجاح!';
+                    
+                    // السحر البرمجي هنا: إخفاء شاشة الدخول وإظهار واجهتك القديمة فوراً
+                    setTimeout(function() {
+                        document.getElementById('loginScreen').style.display = 'none';
+                        document.getElementById('mainSite').style.display = 'block';
+                    }, 1000); // ينتظر ثانية واحدة ثم يفتح الموقع القديم
+                    
+                } else if (this.readyState == 4) {
                     statusMessage.style.color = '#ff3333';
-                    statusMessage.innerText = '❌ فشل الإرسال. تأكد من تفعيل البوت بالضغط على Start بالداخل.';
+                    statusMessage.innerText = '❌ فشل الاتصال، جرب مجدداً.';
                 }
-            })
-            .catch(error => {
-                statusMessage.style.color = '#ff3333';
-                statusMessage.innerText = '❌ حدث خطأ في الاتصال.';
-                console.error('Error:', error);
-            });
+            };
         }
     </script>
 
