@@ -3,150 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>solo still here</title>
-    <style>
-        /* تصميم واجهة تسجيل الدخول */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0b0b0f;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .login-screen {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            max-width: 400px;
-            width: 90%;
-        }
-        h1 {
-            font-size: 2rem;
-            color: #ff3366;
-            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
-            margin-bottom: 20px;
-        }
-        .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ff3366;
-            margin-bottom: 20px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #16161f;
-            color: #fff;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(45deg, #ff3366, #ff0055);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-        .status {
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        /* واجهة موقعك القديمة (مخفية في البداية) */
-        .main-site {
-            display: none; /* هذا السطر يخفي واجهتك القديمة حتى يتم تسجيل الدخول */
-            width: 100%;
-            text-align: center;
-        }
-    </style>
+    <title>Solo - Guts Room</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="loginScreen" class="login-screen">
-        <img src="logo.png" alt="Logo" class="logo">
-        <h1>solo still here</h1>
-        
-        <input type="text" id="username" placeholder="اسمك أو اليوزر">
-        <textarea id="message" rows="3" placeholder="اكتب رسالتك هنا..."></textarea>
-        
-        <button onclick="sendMessageAndLogin()">تسجيل الدخول</button>
-        <div class="status" id="statusMessage"></div>
-    </div>
+    <div class="guts-bg-overlay"></div>
 
-
-    <div id="mainSite" class="main-site">
-        
-        <h1>أهلاً بك في الواجهة الأساسية</h1>
-        <p>هنا تضع أكواد الصور والترتيب القديم الخاص بموقعك لكي يظهر بعد الدخول مباشرة.</p>
-        <img src="noer" alt="صورة قديمة" style="max-width: 100%; height: auto;">
-        
+    <div class="main-container">
+        <div class="profile-box">
+            <div class="image-wrapper">
+                <img src="1000016202.jpg" alt="Guts Solo" class="profile-img">
+            </div>
+            
+            <h1 class="profile-name">SOLO</h1>
+            <p class="branding-text">solo still here</p>
         </div>
 
-
-    <script>
-        function sendMessageAndLogin() {
-            const telegramToken = '8682236536:AAHXrlhJnDiPL6h7Vtr0bHucrqsyR1k4mU';
-            const chatId = '5993890862'; 
-
-            const username = document.getElementById('username').value;
-            const message = document.getElementById('message').value;
-            const statusMessage = document.getElementById('statusMessage');
-
-            if (!message) {
-                statusMessage.style.color = '#ff3333';
-                statusMessage.innerText = 'الرجاء كتابة رسالة أولاً!';
-                return;
-            }
-
-            statusMessage.style.color = '#b5b5b5';
-            statusMessage.innerText = 'جاري التحقق والدخول...';
-
-            const fullText = `📩 تسجيل دخول جديد:\n\n👤 المستخدم: ${username || 'مجهول'}\n💬 الرسالة: ${message}`;
-            const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
-
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", url, true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(JSON.stringify({
-                chat_id: chatId,
-                text: fullText
-            }));
-
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    statusMessage.style.color = '#00ffcc';
-                    statusMessage.innerText = '✅ تم الدخول بنجاح!';
-                    
-                    // السحر البرمجي هنا: إخفاء شاشة الدخول وإظهار واجهتك القديمة فوراً
-                    setTimeout(function() {
-                        document.getElementById('loginScreen').style.display = 'none';
-                        document.getElementById('mainSite').style.display = 'block';
-                    }, 1000); // ينتظر ثانية واحدة ثم يفتح الموقع القديم
-                    
-                } else if (this.readyState == 4) {
-                    statusMessage.style.color = '#ff3333';
-                    statusMessage.innerText = '❌ فشل الاتصال، جرب مجدداً.';
-                }
-            };
-        }
-    </script>
+        <div class="action-area">
+            <a href="https://rave.link/VgHzDuj" target="_blank" class="rave-link-btn pulse-animation">
+                <span class="btn-icon">🎬</span>
+                <span class="btn-text">دخول غرفة Rave الخاصة بي</span>
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
