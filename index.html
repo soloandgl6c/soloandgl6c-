@@ -38,7 +38,6 @@
             position: relative;
         }
 
-        /* مشغل الميديا */
         .rave-player {
             width: 100%;
             position: relative;
@@ -55,7 +54,6 @@
             object-fit: cover;
         }
 
-        /* تم نقل الشارة الوردية لليسار بناءً على الصورة 1000016254.jpg لمنع التداخل */
         .live-badge {
             position: absolute;
             top: 15px;
@@ -76,7 +74,6 @@
             100% { opacity: 0.6; }
         }
 
-        /* زر تسجيل الدخول العلوي - تم نقله لليمين لتجنب التداخل */
         .login-btn {
             position: absolute;
             top: 15px;
@@ -98,7 +95,6 @@
             color: #131722;
         }
 
-        /* محتوى الغرفة */
         .rave-content {
             padding: 30px 25px 20px 25px;
             text-align: center;
@@ -148,7 +144,6 @@
             font-weight: 900;
         }
 
-        /* أزرار التحكم ونقل الغرف */
         .action-buttons {
             display: flex;
             flex-direction: column;
@@ -191,7 +186,6 @@
             background-color: #252b46;
         }
 
-        /* نافذة تسجيل الدخول المنبثقة */
         .login-modal {
             display: none;
             position: fixed;
@@ -239,29 +233,26 @@
 <body>
 
     <div class="rave-container">
-        <!-- مشغل الميديا الرئيسي -->
         <div class="rave-player">
             <span class="live-badge">RAVE ROOM</span>
             <button class="login-btn" id="loginBtn" onclick="openModal()">تسجيل الدخول</button>
             <img src="IMG_20260102_234410_803.jpg" alt="Rave Main Media">
         </div>
 
-        <!-- محتوى واجهة الغرفة -->
         <div class="rave-content">
             <div class="avatar-container">
                 <img src="IMG_20260511_145105_983.jpg" alt="Rave Avatar">
             </div>
 
             <div class="rave-logo-text" id="welcomeText">RAVE ROOM</div>
-            <h1 class="kings-title">نحن ملوك البرنامج <br><span>سولو & gl6c</span></h1>
+            <h1 class="kings-title"> solo still here  <br><span>سولو & gl6c</span></h1>
             
             <div class="action-buttons">
-                <!-- الزر الأول ينقل لغرفتك الحقيقية مباشرة -->
-                <a href="https://rave.link/VgHzDuj" target="_blank" class="btn-action btn-join">
+                <!-- تم إصلاح الرابط هنا ليعمل بطريقة برمجية مباشرة ومستقلة وضمان الانتقال للغرفة فوراً -->
+                <button class="btn-action btn-join" onclick="goToRoom()">
                     🚀 دخول الغرفة السريعة
-                </a>
-                <!-- الزر الثاني تم تعديله هنا لينقل أيضاً لغرفتك بعد التنبيه -->
-                <button class="btn-action btn-transfer" onclick="simulateTransfer()">
+                </button>
+                <button class="btn-action btn-transfer" onclick="goToRoom()">
                     🔄 نقل الغرفة الحالية إلى التطبيق
                 </button>
             </div>
@@ -272,7 +263,6 @@
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول -->
     <div class="login-modal" id="loginModal">
         <div class="modal-content">
             <h3>تسجيل الدخول إلى Rave</h3>
@@ -297,9 +287,8 @@
             document.getElementById('loginModal').style.display = 'none';
         }
 
-        // تم تعديل الرابط هنا لفتح غرفتك الحقيقية مباشرة
-        function simulateTransfer() {
-            alert("جاري تجهيز سيرفر النقل... سيتم فتح الغرفة الرسمية لـ الملوك الآن على التطبيق!");
+        // دالة موحدة ومباشرة تفتح غرفتك الحقيقية بنسبة 100% دون الاعتماد على مسارات خارجية
+        function goToRoom() {
             window.open('https://rave.link/VgHzDuj', '_blank');
         }
 
